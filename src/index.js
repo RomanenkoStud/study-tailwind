@@ -6,9 +6,12 @@ import {
     faCheck, 
     faTimes, 
     faEye,
-    faEyeSlash
+    faEyeSlash,
+    faGlobe,
+    faSignOutAlt,
 } from '@fortawesome/free-solid-svg-icons';
 
+// Add the Font Awesome icons to the library
 library.add(
     faUserAlt, 
     faLock, 
@@ -16,27 +19,18 @@ library.add(
     faCheck, 
     faTimes, 
     faEye,
-    faEyeSlash
+    faEyeSlash,
+    faGlobe,
+    faSignOutAlt,
 );
+// Enable icon substitution and dynamic loading
 dom.watch();
 
 const emailInput = document.getElementById('email');
 const passwordInput = document.getElementById('password');
-const emailProgress = document.getElementById('email-progress');
-const passwordProgress = document.getElementById('password-progress');
 const emailStatus = document.getElementById('email-status');
 const togglePassword = document.getElementById('toggle-password');
 const loginForm = document.getElementById('login-form');
-
-const updateProgress = (valid, inputLength, progress) => {
-    if(inputLength > 0) {
-        progress.style.width = valid ? '100%' : '50%';
-    } else {
-        progress.style.width = '0';
-    }
-    progress.classList.toggle('bg-customGreen', valid);
-    progress.classList.toggle('bg-customRed', !valid);
-}
 
 const updateStatus = (valid, status) => {
     status.classList.toggle('text-customGreen', valid);
@@ -46,15 +40,13 @@ const updateStatus = (valid, status) => {
 }
 
 emailInput.addEventListener('input', () => {
-    const valid = emailInput.checkValidity();
     const inputLength = emailInput.value.length;
-    updateProgress(valid, inputLength, emailProgress);
+    emailInput.classList.toggle('non-empty', inputLength > 0);
 });
 
 passwordInput.addEventListener('input', () => {
-    const valid = passwordInput.checkValidity();
     const inputLength = passwordInput.value.length;
-    updateProgress(valid, inputLength, passwordProgress);
+    passwordInput.classList.toggle('non-empty', inputLength > 0);
 });
 
 togglePassword.addEventListener('click', () => {
@@ -65,6 +57,14 @@ togglePassword.addEventListener('click', () => {
 });
 
 loginForm.addEventListener("submit", (e) => {
-    e.preventDefault();
-    updateStatus(true, emailStatus);
+    const isEmailVerified = true; 
+    // This should be replaced email verification logic
+
+    if (isEmailVerified) {
+        // If email is verified, allow the form to be submitted
+        return;
+    } else {
+        e.preventDefault();
+        updateStatus(isEmailVerified, emailStatus);
+    }
 });

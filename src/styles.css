@@ -14,3 +14,17 @@ select:-webkit-autofill:focus {
     -webkit-box-shadow: 0 0 0px 1000px white inset;
     box-shadow: 0 0 0px 1000px white inset;
 }
+
+input:invalid.non-empty ~ #email-progress > .progress,
+input:invalid.non-empty ~ #password-progress > .progress {
+    @apply w-1/2 bg-customRed;
+}
+
+input:valid.non-empty ~ #email-progress > .progress,
+input:valid.non-empty ~ #password-progress > .progress {
+    @apply w-full bg-customGreen;
+}
+
+.progress {
+    transition-property: width;
+}

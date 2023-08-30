@@ -1,5 +1,7 @@
 # Tailwind + Postcss + Autoprefixer + Vite
 
+![mock](./abler-login-mock.png)
+
 ## Installation and Usage
 
 1. Clone the repository:
