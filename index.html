@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login Form</title>
     
-  <script type="module" crossorigin src="./assets/index-36d2c4b1.js"></script>
+  <script type="module" crossorigin src="./assets/index-628e6ace.js"></script>
   <link rel="stylesheet" href="./assets/index-28c45a80.css">
 </head>
 <body class="bg-white flex justify-center">
@@ -16,7 +16,15 @@
             class="mx-auto w-16 h-auto mb-16"
         >
         <form id="login-form" class="grid grid-cols-12 gap-x-4 mb-8 items-center">
-            <h2 class="col-start-2 col-span-10 text-3xl font-semibold mb-10">Welcome</h2>
+            <h2 
+                id="form-title"
+                class="
+                    col-start-2 col-span-10 
+                    text-3xl font-semibold mb-10
+                "
+            >
+                Welcome
+            </h2>
 
             <!-- #region Email -->
             <span class="col-start-2 col-span-1 text-xl text-gray-500">
@@ -26,7 +34,11 @@
                 type="email" 
                 id="email" 
                 name="email" 
-                class="col-span-8 p-2 h-16 box-border outline-none text-gray-500 focus:text-black"
+                class="
+                    col-span-8 h-16 
+                    box-border p-2 outline-none 
+                    text-gray-500 focus:text-black
+                "
                 placeholder="Email address"
                 required
                 maxlength="254"
@@ -56,7 +68,11 @@
                 type="password" 
                 id="password" 
                 name="password" 
-                class="col-span-8 p-2 h-16 box-border outline-none text-gray-500 focus:text-black"
+                class="
+                    col-span-8 h-16 
+                    box-border p-2 outline-none 
+                    text-gray-500 focus:text-black
+                "
                 placeholder="Password"
                 minlength="8"
                 maxlength="128"
