@@ -6,74 +6,96 @@
     <title>Login Form</title>
     <link rel="stylesheet" href="/src/styles.css">
 </head>
-<body class="bg-white flex justify-center h-screen">
-    <div class="pt-20 w-full max-w-md">
+<body class="bg-white flex justify-center">
+    <div class="pt-20 w-full max-w-md pb-16">
         <img 
             src="./abler-logo.svg" 
             alt="logo" 
             class="mx-auto w-16 h-auto mb-16"
         >
-        <h2 class="text-3xl font-semibold mx-6 mb-10">Welcome</h2>
-        <form id="login-form" class="mb-6">
-            <div class="relative mb-4">
-                <span class="absolute left-9 top-2 text-xl text-gray-500">
-                    <i class="fas fa-user-alt"></i>
-                </span>
-                <input 
-                    type="email" 
-                    id="email" 
-                    name="email" 
-                    class="w-full p-2 px-16 outline-none"
-                    placeholder="Email address"
-                    required
+        <form id="login-form" class="grid grid-cols-12 gap-x-4 mb-8 items-center">
+            <h2 
+                id="form-title"
+                class="
+                    col-start-2 col-span-10 
+                    text-3xl font-semibold mb-10
+                "
+            >
+                Welcome
+            </h2>
+
+            <!-- #region Email -->
+            <span class="col-start-2 col-span-1 text-xl text-gray-500">
+                <i class="fas fa-user-alt"></i>
+            </span>
+            <input 
+                type="email" 
+                id="email" 
+                name="email" 
+                class="
+                    col-span-8 h-16 
+                    box-border p-2 outline-none 
+                    text-gray-500 focus:text-black
+                "
+                placeholder="Email address"
+                required
+                maxlength="254"
+            >
+            <span 
+                id="email-status" 
+                class="col-span-1 text-xl"
+            >
+                <i class="fas"></i>
+            </span>
+            <div id="email-progress" class="h-0.5 col-span-12 bg-gray-300">
+                <div
+                    class="
+                        progress
+                        h-full w-0
+                        transition ease-linear duration-300
+                    "
+                ></div>
+            </div>
+            <!-- #endregion -->
+
+            <!-- #region Password -->
+            <span class="col-start-2 col-span-1 text-xl text-gray-500">
+                <i class="fas fa-lock"></i>
+            </span>
+            <input 
+                type="password" 
+                id="password" 
+                name="password" 
+                class="
+                    col-span-8 h-16 
+                    box-border p-2 outline-none 
+                    text-gray-500 focus:text-black
+                "
+                placeholder="Password"
+                minlength="8"
+                maxlength="128"
+                required
+            >
+            <span 
+                class="col-span-1 text-xl text-gray-500 cursor-pointer" 
+                id="toggle-password"
+            >
+                <i class="fas fa-eye-slash"></i>
+            </span>
+            <div id="password-progress" class="h-0.5 col-span-12 bg-gray-300">
+                <div
+                    class="
+                        progress
+                        h-full w-0
+                        transition ease-linear duration-300
+                    "
                 >
-                <span 
-                    id="email-status" 
-                    class="absolute right-9 top-2 text-xl"
-                >
-                    <i class="fas"></i>
-                </span>
-                <div id="email-progress" class="h-0.5 w-full bg-gray-300 mt-2">
-                    <div
-                        class="
-                            progress
-                            h-full w-0
-                            transition ease-linear duration-300
-                        "
-                    ></div>
                 </div>
             </div>
-            <div class="relative ">
-                <span class="absolute left-9 top-2 text-xl text-gray-500">
-                    <i class="fas fa-lock"></i>
-                </span>
-                <input 
-                    type="password" 
-                    id="password" 
-                    name="password" 
-                    class="w-full p-2 px-16 outline-none"
-                    placeholder="Password"
-                    minlength="8"
-                    required
-                >
-                <span 
-                    class="absolute right-9 top-2 text-xl text-gray-500 cursor-pointer" 
-                    id="toggle-password"
-                >
-                    <i class="fas fa-eye"></i>
-                </span>
-                <div id="password-progress" class="h-0.5 w-full bg-gray-300 mt-2">
-                    <div
-                        class="
-                            progress
-                            h-full w-0
-                            transition ease-linear duration-300
-                        "
-                    >
-                    </div>
-                </div>
-            </div>
-            <div class="flex justify-between items-center mt-6 mx-6">
+            <!-- #endregion -->
+
+            <!-- #region FormControls -->
+            <div class="col-start-2 col-span-10 flex justify-between items-center mt-6">
                 <a href="#" class="text-md text-gray-500 flex items-center gap-3">
                     <span class="text-gray-500 text-xl">
                         <i class="fas fa-info-circle"></i>
@@ -81,21 +103,23 @@
                     Forgot password
                 </a>
                 <button 
+                    id="submit-button"
                     type="submit" 
                     class="
                         text-gray-500
                         font-semibold
                         px-8 py-2 
                         rounded-3xl 
-                        border border-gray-500 
-                        hover:bg-customGreen hover:text-white
-                        hover:border-customGreen
+                        border border-gray-500
                     "
                 >
                     Login
                 </button>
             </div>
+            <!-- #endregion -->
         </form>
+        
+        <!-- #region BottomBar -->
         <div class="fixed bottom-0 left-0 right-0 bg-gray-200 p-4 px-9 flex justify-between">
             <button class="text-xl bg-white h-9 w-9 rounded-full text-gray-500 hover:text-gray-700">
                 <i class="fas fa-globe"></i>
@@ -107,6 +131,7 @@
                 </span>
             </button>
         </div>
+        <!-- #endregion -->
     </div>
     <script type="module" src="/src/index.js"></script>
 </body>

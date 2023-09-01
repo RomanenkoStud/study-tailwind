@@ -31,6 +31,8 @@ const passwordInput = document.getElementById('password');
 const emailStatus = document.getElementById('email-status');
 const togglePassword = document.getElementById('toggle-password');
 const loginForm = document.getElementById('login-form');
+const submitButton = document.getElementById('submit-button');
+const formTitle = document.getElementById('form-title');
 
 const updateStatus = (valid, status) => {
     status.classList.toggle('text-customGreen', valid);
@@ -41,7 +43,11 @@ const updateStatus = (valid, status) => {
 
 emailInput.addEventListener('input', () => {
     const inputLength = emailInput.value.length;
+    const isEmailVerified = emailInput.checkValidity();
     emailInput.classList.toggle('non-empty', inputLength > 0);
+
+    updateStatus(isEmailVerified, emailStatus);
+    emailInput.classList.remove('verification-failed');
 });
 
 passwordInput.addEventListener('input', () => {
@@ -56,15 +62,53 @@ togglePassword.addEventListener('click', () => {
     togglePassword.querySelector('svg').classList.toggle('fa-eye');
 });
 
-loginForm.addEventListener("submit", (e) => {
-    const isEmailVerified = true; 
-    // This should be replaced email verification logic
+loginForm.addEventListener('input', (event) => {
+    formTitle.textContent = "Welcome";
+});
 
-    if (isEmailVerified) {
-        // If email is verified, allow the form to be submitted
-        return;
-    } else {
-        e.preventDefault();
-        updateStatus(isEmailVerified, emailStatus);
-    }
+loginForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+
+    const email = emailInput.value; // Replace with the email you want to validate
+
+    // Define the Firebase Function URL
+    const functionUrl = 
+        'https://us-central1-email-validation-2069.cloudfunctions.net/validateEmail';
+
+    // Define the request body
+    const requestBody = {
+        email: email,
+    };
+
+    submitButton.textContent = 'Loading';
+    submitButton.classList.remove('error');
+    submitButton.classList.add('loading');
+
+    // Make a POST request to the Firebase Function
+    fetch(functionUrl, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(requestBody),
+        })
+        .then((response) => {
+            if (!response.ok) {
+                throw new Error('Email validation failed');
+            }
+            return response.json();
+        })
+        .then((data) => {
+            submitButton.textContent = 'Login';
+            submitButton.classList.remove('loading');
+            alert(`Welcome, ${email}`);
+        })
+        .catch((error) => {
+            updateStatus(false, emailStatus)
+            formTitle.textContent = "Oops!";
+            emailInput.classList.add('verification-failed');
+            submitButton.textContent = 'Retry';
+            submitButton.classList.remove('loading');
+            submitButton.classList.add('error');
+        });
 });

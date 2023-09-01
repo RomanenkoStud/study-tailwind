@@ -4,25 +4,57 @@
 
 input:-webkit-autofill,
 input:-webkit-autofill:hover,
-input:-webkit-autofill:focus,
-textarea:-webkit-autofill,
-textarea:-webkit-autofill:hover,
-textarea:-webkit-autofill:focus,
-select:-webkit-autofill,
-select:-webkit-autofill:hover,
-select:-webkit-autofill:focus {
+input:-webkit-autofill:focus {
     -webkit-box-shadow: 0 0 0px 1000px white inset;
     box-shadow: 0 0 0px 1000px white inset;
 }
 
-input:invalid.non-empty ~ #email-progress > .progress,
-input:invalid.non-empty ~ #password-progress > .progress {
+input:-webkit-autofill,
+input:-webkit-autofill:hover {
+    -webkit-text-fill-color: rgb(107 114 128 / var(--tw-text-opacity));
+}
+
+input:-webkit-autofill:focus {
+    -webkit-text-fill-color: rgb(0 0 0 / var(--tw-text-opacity));
+}
+
+input:invalid.non-empty#email ~ #email-progress > .progress,
+input:invalid.non-empty#password ~ #password-progress > .progress {
     @apply w-1/2 bg-customRed;
 }
 
-input:valid.non-empty ~ #email-progress > .progress,
-input:valid.non-empty ~ #password-progress > .progress {
+input:valid.non-empty#email ~ #email-progress > .progress,
+input:valid.non-empty#password ~ #password-progress > .progress {
     @apply w-full bg-customGreen;
+}
+
+input#email ~ #email-status {
+    display: none;
+}
+
+input.non-empty#email ~ #email-status {
+    display: initial;
+}
+
+input.verification-failed.non-empty#email ~ #email-progress > .progress,
+input.verification-failed.non-empty#password ~ #password-progress > .progress {
+    @apply w-full bg-customRed;
+}
+
+form:invalid button {
+    pointer-events: none;
+}
+
+form:valid button {
+    @apply bg-customGreen text-white border-customGreen;
+}
+
+form button.error {
+    @apply bg-customRed text-white border-customRed;
+}
+
+form button.loading {
+    @apply pointer-events-none text-gray-500 bg-white border-gray-500;
 }
 
 .progress {
